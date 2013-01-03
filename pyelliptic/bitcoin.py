@@ -4,7 +4,7 @@ def makeCryptor(privkey):
   privkey_bin = '\x02\xca\x00 '+a.changebase(privkey,16,256,minlen=32)
   pubkey = a.changebase(a.privtopub(privkey),16,256,minlen=65)[1:]
   pubkey_bin = '\x02\xca\x00 '+pubkey[:32]+'\x00 '+pubkey[32:]
-  cryptor = pyelliptic.ecc(curve='secp256k1',privkey=privkey_bin,pubkey=pubkey_bin)
+  cryptor = pyelliptic.ECC(curve='secp256k1',privkey=privkey_bin,pubkey=pubkey_bin)
   return cryptor
 def hexToPubkey(pubkey):
   pubkey_raw = a.changebase(pubkey[2:],16,256,minlen=64)
@@ -12,13 +12,13 @@ def hexToPubkey(pubkey):
   return pubkey_bin
 def makePubCryptor(pubkey):
   pubkey_bin = hexToPubkey(pubkey)
-  return pyelliptic.ecc(curve='secp256k1',pubkey=pubkey_bin)
+  return pyelliptic.ECC(curve='secp256k1',pubkey=pubkey_bin)
 # Converts hex private key into hex public key
 def privToPub(privkey):
   return a.privtopub(privkey)
 # Encrypts message with hex public key
 def encrypt(msg,hexPubkey):
-  return pyelliptic.ecc(curve='secp256k1').encrypt(msg,hexToPubkey(hexPubkey))
+  return pyelliptic.ECC(curve='secp256k1').encrypt(msg,hexToPubkey(hexPubkey))
 # Decrypts message with hex private key
 def decrypt(msg,hexPrivkey):
   return makeCryptor(hexPrivkey).decrypt(msg)
