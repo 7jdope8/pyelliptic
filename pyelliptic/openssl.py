@@ -417,10 +417,7 @@ except:
             try:
                 from os import path, environ
                 temp_dir = sys._MEIPASS
-                print 'temp_dir', temp_dir
                 lib_path = path.join(temp_dir, "libeay32.dll")
-                print 'lib_path', lib_path
-                #my_lib = ctypes.cdll.LoadLibrary(lib_path)
                 OpenSSL = _OpenSSL(lib_path)
             except:
                 raise Exception("Couldn't load the OpenSSL library. You must install it.")
