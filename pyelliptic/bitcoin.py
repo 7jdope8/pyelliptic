@@ -22,6 +22,9 @@ def encrypt(msg,hexPubkey):
 # Decrypts message with hex private key
 def decrypt(msg,hexPrivkey):
   return makeCryptor(hexPrivkey).decrypt(msg)
+# Decrypts message with an existing pyelliptic.ECC object
+def decryptFast(msg,cryptor):
+  return cryptor.decrypt(msg)
 # Signs with hex private key
 def sign(msg,hexPrivkey):
   return makeCryptor(hexPrivkey).sign(msg)
