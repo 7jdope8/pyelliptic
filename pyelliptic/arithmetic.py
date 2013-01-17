@@ -30,7 +30,6 @@ def encode(val,base,minlen=0):
       result = code_string[val % base] + result
       val /= base
    if len(result) < minlen:
-      print 'The length of len(result) is less than minlen.'
       result = code_string[0]*(minlen-len(result))+result
    return result
 
